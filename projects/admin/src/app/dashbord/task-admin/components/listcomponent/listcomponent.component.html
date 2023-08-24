@@ -1,0 +1,101 @@
+<div class="all-tasks container">
+    <div class="d-flex  justify-content-end">
+        <button mat-raised-button (click)="openDialog()" class="Add-Task">{{ 'tasks.addTask'|translate }}</button>
+    </div>
+    <div class="searches d-flex justify-content-between mt-4">
+      <div class="">
+        <mat-form-field appearance="outline">
+          <mat-label> Search  </mat-label>
+          <input matInput placeholder="Search" (keyup)="Search($event.target)" />
+        </mat-form-field>
+
+      </div>
+      <div class="">
+        <mat-form-field appearance="outline">
+          <mat-label> By user </mat-label>
+          <mat-select placeholder="By user" (selectionChange)="selectUser($event)">
+            <mat-option  *ngFor="let user of users "  [value]="user.id"> {{ user.name }}</mat-option>
+           
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="">
+        <mat-form-field appearance="outline">
+          <mat-label> Status  </mat-label>
+          <mat-select placeholder="Status" (selectionChange)="selectProgress($event)">
+            <mat-option *ngFor="let statue of status" [value]="statue.name"> {{ statue.name }}</mat-option>
+          
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="">
+        <mat-form-field appearance="outline">
+          <mat-date-range-input [rangePicker]="picker">
+            <input matStartDate placeholder="Start date"  [value]="startDate"  (dateChange)="selectDate($event ,'fromDate')"  >
+            <input matEndDate placeholder="End date"  [value]="endDate" (dateChange)="selectDate($event ,'toDate')">
+          </mat-date-range-input>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+    </div>
+
+</div>
+<div  class="table-all-tasks container">
+    <div class="example-container mat-elevation-z8">
+        <mat-table #table [dataSource]="dataSource">
+      
+          <!-- Position Column -->
+          <ng-container matColumnDef="position" let i = "index">
+            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+            <mat-cell *matCellDef="let element let i = index"> 
+                {{i+1 }}
+                 <img  [src]="'https://oparation.onrender.com/'+ element.image"  alt="" >
+                </mat-cell>
+          </ng-container>
+      
+          <!-- Name Column -->
+          <ng-container matColumnDef="title">
+            <mat-header-cell *matHeaderCellDef>Title </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.title}} </mat-cell>
+          </ng-container>
+            <!-- Weight Column -->
+            <ng-container matColumnDef="user">
+                <mat-header-cell *matHeaderCellDef> User </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.user}} </mat-cell>
+              </ng-container>
+          
+      
+          <!-- Weight Column -->
+          <ng-container matColumnDef="deadline">
+            <mat-header-cell *matHeaderCellDef> deadline </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.deadline}} </mat-cell>
+          </ng-container>
+      
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="status">
+            <mat-header-cell *matHeaderCellDef> status </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
+          </ng-container>
+           <!-- Weight Column -->
+           <ng-container matColumnDef="action">
+            <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                 <button type="button" class="btn btn-warning mx-2" (click)="updateTask(element)">Update</button>
+                 <button type="button" class="btn btn-danger" (click)="deleteTask(element._id)"> Delete</button>
+             </mat-cell>
+          </ng-container>
+      
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns | paginate: { id: 'tasks',
+          itemsPerPage: 10,
+          currentPage: p,
+          totalItems: total}"  ></mat-row>
+        </mat-table>
+        <div class="d-flex justify-content-center">
+          <pagination-controls (pageChange)="changePage($event)" id="tasks"></pagination-controls>
+        </div>
+      </div>
+      
+</div>

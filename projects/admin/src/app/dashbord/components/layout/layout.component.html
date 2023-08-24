@@ -1,0 +1,21 @@
+<nav class="navbar">
+    <div class="container">
+        
+        <div class="d-flex justify-content-start all-links">
+         
+            <ul class="link-page navbar-brand ">
+                <li> <a class="navbar-brand  ">Tasks</a></li>
+                <li><a  class="navbar-brand active" aria-current="page" href="#">All-Tasks</a></li>
+                <li><a  aria-current="page" class="navbar-brand" href="#">Users</a></li>
+            </ul>
+        </div>
+       
+        <div class="d-flex" >
+            <button class="logout"> logout</button> 
+            <button class="logout" (click)="shangeLanguage()">   {{Lang =='en'? 'عربى' :"En" }} </button> 
+        </div>
+      </div>
+
+</nav>
+
+<router-outlet></router-outlet>

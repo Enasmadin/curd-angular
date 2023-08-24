@@ -1,0 +1,36 @@
+.all-tasks{
+    margin-top: 20px;
+
+    .Add-Task{
+         background-color: #b1315c; 
+         color: white;
+         padding: 20px 30px;
+         font-size: 20px;
+
+    }
+}
+ ::ng-deep.mdc-data-table__header-cell {
+    /* background-color: var(--mdc-theme-surface, #fff); */
+    background: #b1315c !important;
+    color:white !important ;
+}
+img{
+    width: 70px;
+    height: 70px;
+    padding: 2px;
+}
+mat-form-field{
+    width: 250px;
+}
+.date-duble{
+    input{
+        width:83px;
+    }
+}
+// custum pagination 
+
+::ng-deep .ngx-pagination .current {
+    
+    background: #b1315c !important;
+   
+}
